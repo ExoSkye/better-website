@@ -22,11 +22,11 @@ const pages = await Astro.glob<Frontmatter>("../pages/*.md")
 </script>
 
 <div class="navbar bg-base-100">
-    {pages.map((post) => (
     <div class="flex-1">
-        <a class="btn btn-ghost normal-case text-xl">{post.frontmatter.title}</a>
+        {pages.map((post) => (
+            <a class="btn btn-ghost normal-case text-xl" href={post.url}>{post.frontmatter.title}</a>
+        ))}
     </div>
-    ))}
     <div class="flex-none gap-2">
         <div class="form-control">
             <input type="text" placeholder="GitHub search" class="input input-bordered" id="search-box" />
