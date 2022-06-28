@@ -1,0 +1,44 @@
+---
+interface Frontmatter {
+    title: string
+    description?: string
+}
+
+const pages = await Astro.glob<Frontmatter>("../pages/*.md")
+---
+
+<script>
+    var searchbox = document.getElementById("search-box");
+    searchbox.addEventListener("keydown", function (e) {
+        if (e.code === "Enter") {
+            validate(e);
+        }
+    });
+
+    function validate(e) {
+        var text = e.target.value;
+        location.href = 'https://github.com/search?q=user%3AProtoByter+'+text;
+    }
+</script>
+
+<div class="navbar bg-base-100">
+    {pages.map((post) => (
+    <div class="flex-1">
+        <a class="btn btn-ghost normal-case text-xl">{post.frontmatter.title}</a>
+    </div>
+    ))}
+    <div class="flex-none gap-2">
+        <div class="form-control">
+            <input type="text" placeholder="GitHub search" class="input input-bordered" id="search-box" />
+        </div>
+        <div class="dropdown dropdown-end">
+            <label tabindex="0" class="btn btn-ghost btn-circle avatar">
+                <div class="w-10 rounded-full">
+                    <a href="https://github.com/ProtoByter/">
+                        <img src="https://www.gravatar.com/avatar/9416dd08040d7a35c677198444930e9b" />
+                    </a>
+                </div>
+            </label>
+        </div>
+    </div>
+</div>
